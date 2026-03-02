@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BDS GYM</title>
+
+<!-- Cormorant Garamond Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at center, #7a0000, #2a0000);
+}
+
+/* HEADER */
+header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+}
+
+.join-btn {
+    background: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+    border: none;
+}
+
+.join-btn:hover {
+    background: gold;
+    transform: scale(1.1);
+}
+
+/* CARD STYLE */
+.card {
+    background: white;
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+/* HERO EXTENDED */
+.hero {
+    padding-bottom: 80px; /* extended downward */
+}
+
+.hero img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+/* EQUIPMENT GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px; /* separated spacing */
+}
+
+.equipment {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.equipment img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.equipment:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.35);
+}
+
+/* PLANS */
+.plans {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.8;
+}
+
+/* LOCATION */
+.location {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@media(max-width:600px){
+    .hero img {
+        height: 300px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">BDS GYM</div>
+    <button class="join-btn" onclick="payNow()">JOIN</button>
+</header>
+
+<!-- HERO SECTION -->
+<div class="card hero">
+    <img src="gym-couple.jpg" alt="Gym">
+</div>
+
+<!-- EQUIPMENT SECTION -->
+<div class="card">
+    <div class="grid">
+
+        <div class="equipment" onclick="openModal('Stationary Bike')">
+            <img src="bike.jpg">
+            <p>Stationary Bike</p>
+        </div>
+
+        <div class="equipment" onclick="openModal('Kettlebell')">
+            <img src="kettlebell.jpg">
+            <p>Kettlebell</p>
+        </div>
+
+        <div class="equipment" onclick="openModal('Barbell')">
+            <img src="barbell.jpg">
+            <p>Barbell</p>
+        </div>
+
+        <div class="equipment" onclick="openModal('Lat Pulldown')">
+            <img src="lat.jpg">
+            <p>Lat Pulldown</p>
+        </div>
+
+        <div class="equipment" onclick="openModal('Bench Press')">
+            <img src="bench.jpg">
+            <p>Bench Press</p>
+        </div>
+
+        <div class="equipment" onclick="openModal('Squat Rack')">
+            <img src="squat.jpg">
+            <p>Squat Rack</p>
+        </div>
+
+        <div class="equipment" onclick="openModal('Dumbbells')">
+            <img src="dumbbell.jpg">
+            <p>Dumbbells</p>
+        </div>
+
+        <div class="equipment" onclick="openModal('Treadmill')">
+            <img src="treadmill.jpg">
+            <p>Treadmill</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- PLANS -->
+<div class="card plans">
+About Plans<br><br>
+Joining<br>
+1500/-<br><br>
+Monthly<br>
+500/-
+</div>
+
+<!-- LOCATION -->
+<div class="card location">
+📍 Location: BDS Gym Centre, Guwahati
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">X</span>
+        <h3 id="modalTitle"></h3>
+        <p>• Exercise 1<br>• Exercise 2<br>• Exercise 3</p>
+    </div>
+</div>
+
+<script>
+
+function payNow() {
+    window.location.href = "upi://pay?pa=8638136604@ibl&pn=BDSGYM&cu=INR";
+}
+
+function openModal(name){
+    document.getElementById("modal").style.display="flex";
+    document.getElementById("modalTitle").innerText=name;
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
